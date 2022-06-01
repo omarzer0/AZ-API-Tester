@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ns_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvRequestType"
+            style="@style/headerTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Request Type" />
+
+        <TextView
+            android:id="@+id/tv1__"
+            style="@style/headerTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/response_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRequestType" />
+
+        <TextView
+            android:id="@+id/tvResponseCode"
+            style="@style/headerTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/addBtnColor"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/tv1__"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv1__"
+            app:layout_constraintTop_toTopOf="@+id/tv1__"
+            tools:text="200" />
+
+        <TextView
+            android:id="@+id/tv2__"
+            style="@style/headerTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/error_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv1__" />
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            style="@style/headerTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/tv2__"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv2__"
+            app:layout_constraintTop_toTopOf="@+id/tv2__"
+            tools:text="No Error" />
+
+
+        <TextView
+            android:id="@+id/tv3__"
+            style="@style/headerTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/queriesRVColor"
+            android:text="@string/query_parameters"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvErrorMessage" />
+
+        <ImageView
+            android:id="@+id/btnShowQueries"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_show"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tv3__"
+            app:layout_constraintEnd_toEndOf="@+id/tvResponseCode"
+            app:layout_constraintTop_toTopOf="@+id/tv3__"
+            app:tint="@color/addBtnColor" />
+
+        <ImageView
+            android:id="@+id/btnHideQueries"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_hide"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv3__"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv3__"
+            app:tint="@color/removeBtnColor" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvQueryParams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv3__"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_list_map"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv4__"
+            style="@style/headerTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/requestHeaderColor"
+            android:text="@string/request_headers"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvQueryParams" />
+
+        <ImageView
+            android:id="@+id/btnShowRequestHeaders"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_show"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tv4__"
+            app:layout_constraintEnd_toEndOf="@+id/tvResponseCode"
+            app:layout_constraintTop_toTopOf="@+id/tv4__"
+            app:tint="@color/addBtnColor" />
+
+        <ImageView
+            android:id="@+id/btnHideRequestHeaders"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_hide"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv4__"
+            app:layout_constraintEnd_toEndOf="@+id/tvResponseCode"
+            app:layout_constraintTop_toTopOf="@+id/tv4__"
+            app:tint="@color/removeBtnColor" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRequestHeaders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv4__"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_list_map"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tv5__"
+            style="@style/headerTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/responseHeaderColor"
+            android:text="@string/response_headers"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvRequestHeaders" />
+
+        <ImageView
+            android:id="@+id/btnShowResponseHeaders"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_show"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tv5__"
+            app:layout_constraintEnd_toEndOf="@+id/tvResponseCode"
+            app:layout_constraintTop_toTopOf="@+id/tv5__"
+            app:tint="@color/addBtnColor" />
+
+        <ImageView
+            android:id="@+id/btnHideResponseHeaders"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_hide"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv5__"
+            app:layout_constraintEnd_toEndOf="@+id/tvResponseCode"
+            app:layout_constraintTop_toTopOf="@+id/tv5__"
+            app:tint="@color/removeBtnColor" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvResponseHeaders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv5__"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_list_map"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.81" />
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/queriesGroup"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:constraint_referenced_ids="tv3__,btnShowQueries"-->
+        <!--            />-->
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/requestHeadersGroup"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"/>-->
+
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/responseHeadersGroup"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"/>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

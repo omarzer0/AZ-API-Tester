@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">InstabugTaskAZ</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="url_example">URL</string>
+    <string name="request_type">Request Type</string>
+    <string name="get">GET</string>
+    <string name="post">POST</string>
+    <string name="request_headers">Request headers</string>
+    <string name="request_body">Request body</string>
+    <string name="request_body_example">{\"name\":\"Omar\"}</string>
+    <string name="key">Key</string>
+    <string name="value">Value</string>
+    <string name="request">Request</string>
+    <string name="query_parameters">Query Parameters</string>
+    <string name="response_code">Response code</string>
+    <string name="error_message">Error Message</string>
+    <string name="response_headers">Response Headers</string>
+    <string name="show_all">Show All</string>
+    <string name="get_only">GET only</string>
+    <string name="post_only">POST only</string>
+    <string name="time_decs">Time Decs</string>
+    <string name="time_asc">Time Asc</string>
+</resources>
