@@ -21,14 +21,13 @@ class SearchViewModel(context: Context) : ViewModel() {
     private fun filterAndSort() {
         val sortingDesc = _searchState.value?.sortDesc ?: true
         val typeToShow = _searchState.value?.typeToShow ?: ALL
-
         val requestWithResponses = when (typeToShow) {
             ALL -> dataList
             GET -> dataList.filter { it.request.requestType == GET.name }
             POST -> dataList.filter { it.request.requestType == POST.name }
-        }.also { list ->
+        }.let { list ->
             if (sortingDesc) list.sortedByDescending { it.timestamp }
-            else dataList.sortedBy { it.timestamp }
+            else list.sortedBy { it.timestamp }
         }
         _searchState.value = _searchState.value?.copy(
             typeToShow = typeToShow,
@@ -49,8 +48,12 @@ class SearchViewModel(context: Context) : ViewModel() {
     init {
         _searchState.value = SearchViewModelState()
         repository.getAllRequestWithResponse {
+            /**
+             * MutableLivedata.setValue() runs on the main thread so we should run that code on
+             * the Main thread or use postValue() with consideration
+             * */
             AZExecutors.executeMainThread {
-                val dataList = it
+                dataList = it
                 _searchState.value = _searchState.value?.copy(requestWithResponses = dataList)
             }
         }

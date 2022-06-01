@@ -18,8 +18,6 @@ object RequestHandler {
     fun networkCall(requestData: RequestData, onComplete: (ResponseData) -> Unit) {
         requestData.apply {
             val uri = initURI(link = uri, paths = paths, queryParameters = queryParameters)
-            Log.e(TAG, "uri: $uri")
-
             AZExecutors.executeNetworkOP {
                 callApi(
                     uri = uri,
@@ -30,7 +28,6 @@ object RequestHandler {
                 )
             }
         }
-
     }
 
     private fun initURI(

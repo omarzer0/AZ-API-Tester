@@ -98,17 +98,15 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvQueryParams"
+        android:id="@+id/rvRequestWithHeaders"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chpGroupTime"
         tools:itemCount="3"
-        tools:listitem="@layout/item_request_with_response"
-        tools:visibility="visible" />
+        tools:listitem="@layout/item_request_with_response" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

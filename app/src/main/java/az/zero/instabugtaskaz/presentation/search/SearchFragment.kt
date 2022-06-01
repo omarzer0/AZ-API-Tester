@@ -1,5 +1,6 @@
 package az.zero.instabugtaskaz.presentation.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import az.zero.instabugtaskaz.R
 import az.zero.instabugtaskaz.databinding.FragmentSearchBinding
 import az.zero.instabugtaskaz.presentation.adapters.RequestWithResponseAdapter
+import az.zero.instabugtaskaz.presentation.result.ResultActivity
 import az.zero.instabugtaskaz.presentation.search.TypeToShow.*
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -22,7 +24,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val viewModelFactory = SearchProviderFactory(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
         adapter = RequestWithResponseAdapter {
-
+            val intent = Intent(requireContext(), ResultActivity::class.java)
+            intent.putExtra(ResultActivity.REQUEST_WITH_RESPONSE_KEY, it)
+            startActivity(intent)
+        }.also {
+            binding.rvRequestWithHeaders.adapter = it
         }
         observeState()
         setClickListeners()
@@ -30,9 +36,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun observeState() {
         viewModel.searchState.observe(viewLifecycleOwner) {
-            Log.e(TAG, "updateView: $it")
-
+            Log.e("TestList", "updateView: ${it.requestWithResponses.size}")
             binding.apply {
+                adapter.submitList(it.requestWithResponses)
                 val typeToShowId = when (it.typeToShow) {
                     ALL -> R.id.chpShowAll
                     GET -> R.id.chpGetOnly

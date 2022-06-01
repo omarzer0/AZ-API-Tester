@@ -2,10 +2,13 @@ package az.zero.instabugtaskaz.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import az.zero.instabugtaskaz.R
 import az.zero.instabugtaskaz.data.db.RequestWithResponseEntity
+import az.zero.instabugtaskaz.data.network.RequestHandler.RequestType.GET
 import az.zero.instabugtaskaz.databinding.ItemRequestWithResponseBinding
 import az.zero.instabugtaskaz.presentation.adapters.RequestWithResponseAdapter.RequestWithResponseViewHolder
 import az.zero.instabugtaskaz.utils.getDateWithTime
@@ -47,9 +50,18 @@ class RequestWithResponseAdapter(val onItemClick: (RequestWithResponseEntity) ->
         fun bind(item: RequestWithResponseEntity) {
             binding.apply {
                 tvRequestType.text = item.request.requestType
+
+                val typeColor = if (item.request.requestType == GET.name) R.color.getTextColor
+                else R.color.postTextColor
+
+                tvRequestType.setTextColor(ContextCompat.getColor(tvRequestType.context, typeColor))
                 tvLink.text = item.request.uri
                 tvExecutionTime.text = getDateWithTime(item.timestamp)
                 tvResponseCode.text = "${item.response.responseCode}"
+
+                val resColor = if (item.response.responseCode in 200..299) R.color.addBtnColor
+                else R.color.removeBtnColor
+                tvResponseCode.setTextColor(ContextCompat.getColor(tvRequestType.context, resColor))
             }
         }
 
