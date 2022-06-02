@@ -14,7 +14,6 @@ import az.zero.instabugtaskaz.databinding.ActivityResultBinding
 import az.zero.instabugtaskaz.presentation.adapters.ListMapAdapter
 
 class ResultActivity : AppCompatActivity() {
-    private val TAG = "ResultActivity"
     private var data: RequestWithResponseEntity? = null
     private lateinit var viewModel: ResultViewModel
     private lateinit var binding: ActivityResultBinding

@@ -26,20 +26,3 @@ object RequestWithResponseColumns : BaseColumns {
     const val TIME_STAMP = "timestamp"
 }
 
-fun JSONObject.toRequestWithResponse(): RequestWithResponseEntity {
-    Log.e("toRequestWithResponse", "toRequestWithResponse:$this ")
-    val request = get(REQUEST) as RequestData
-    val response = get(RESPONSE) as ResponseData
-    val timestamp = get(TIME_STAMP) as Long
-    return RequestWithResponseEntity(request, response, timestamp)
-}
-
-fun RequestWithResponseEntity.toJsonObject(): JSONObject {
-    val jsonObject = JSONObject().apply {
-        put(REQUEST, request)
-        put(RESPONSE, response)
-        put(TIME_STAMP, timestamp)
-    }
-    return jsonObject
-}
-

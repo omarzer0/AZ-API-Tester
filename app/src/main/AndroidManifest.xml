@@ -3,6 +3,8 @@
     package="az.zero.instabugtaskaz">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,14 +15,21 @@
         android:theme="@style/Theme.InstabugTaskAZ">
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="true">
+            android:exported="true" />
+
+        <activity android:name=".presentation.result.ResultActivity" />
+
+        <activity
+            android:name=".presentation.splash.SplashActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.result.ResultActivity" />
     </application>
 
 </manifest>

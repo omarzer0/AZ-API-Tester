@@ -45,6 +45,16 @@ class SearchViewModel(context: Context) : ViewModel() {
         filterAndSort()
     }
 
+    fun checkForUpdate() {
+        repository.getAllRequestWithResponse {
+            AZExecutors.executeMainThread {
+                if (dataList.size == it.size) return@executeMainThread
+                dataList = it
+                filterAndSort()
+            }
+        }
+    }
+
     init {
         _searchState.value = SearchViewModelState()
         repository.getAllRequestWithResponse {

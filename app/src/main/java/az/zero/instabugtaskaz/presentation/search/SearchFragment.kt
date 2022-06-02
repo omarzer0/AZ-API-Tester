@@ -13,7 +13,6 @@ import az.zero.instabugtaskaz.presentation.result.ResultActivity
 import az.zero.instabugtaskaz.presentation.search.TypeToShow.*
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
-    private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
     private lateinit var adapter: RequestWithResponseAdapter
@@ -30,13 +29,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }.also {
             binding.rvRequestWithHeaders.adapter = it
         }
+
         observeState()
         setClickListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkForUpdate()
+    }
+
     private fun observeState() {
         viewModel.searchState.observe(viewLifecycleOwner) {
-            Log.e("TestList", "updateView: ${it.requestWithResponses.size}")
             binding.apply {
                 adapter.submitList(it.requestWithResponses)
                 val typeToShowId = when (it.typeToShow) {

@@ -2,7 +2,6 @@ package az.zero.instabugtaskaz.presentation.home
 
 import android.content.Context
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +10,7 @@ import az.zero.instabugtaskaz.data.db.RequestWithResponseEntity
 import az.zero.instabugtaskaz.data.network.RequestHandler.RequestType
 import az.zero.instabugtaskaz.data.network.RequestHandler.RequestType.GET
 import az.zero.instabugtaskaz.data.repository.AppRepository
+import az.zero.instabugtaskaz.domain.models.ListMapItem
 import az.zero.instabugtaskaz.domain.models.request.RequestData
 import az.zero.instabugtaskaz.utils.Event
 
@@ -29,15 +29,12 @@ class HomeViewModel(context: Context) : ViewModel() {
 
     fun networkCall(requestData: RequestData) {
         repository.networkCall(requestData) {
-            Log.e("RequestHandler", "onViewCreated: $it")
             val requestWithResponse = RequestWithResponseEntity(
                 request = requestData,
                 response = it,
                 timestamp = System.currentTimeMillis()
             )
-            repository.saveToDb(requestWithResponse) { idInserted ->
-                Log.e("networkCall", "id inserter $idInserted")
-            }
+            repository.saveToDb(requestWithResponse) { }
             _homeEvent.postValue(
                 Event(HomeViewModelEvents.NavigateToResult(requestWithResponse))
             )
@@ -51,18 +48,52 @@ class HomeViewModel(context: Context) : ViewModel() {
         )
     }
 
-    fun updateHeadsList(headersViews: List<View>) {
+    fun updateQueriesList(query: Pair<String, ListMapItem>, isAdd: Boolean = true) {
+        val updatedQueries = _homeState.value?.copy()?.queries?.toMutableSet() ?: return
+        if (isAdd) updatedQueries.add(query)
+        else updatedQueries.remove(query)
+
         _homeState.value = _homeState.value?.copy(
-            headers = headersViews
+            queries = updatedQueries
         )
     }
 
+    fun updateAllQueriesList(queries: List<Pair<String, ListMapItem>>) {
+        val updatedQueries = _homeState.value?.copy()?.queries?.toMutableSet() ?: return
+        updatedQueries.clear()
+        updatedQueries.addAll(queries)
+        _homeState.value = _homeState.value?.copy(queries = updatedQueries)
+    }
+
+    fun updateHeadersList(query: Pair<String, ListMapItem>, isAdd: Boolean = true) {
+        val updatedHeaders = _homeState.value?.copy()?.headers?.toMutableSet() ?: return
+        if (isAdd) updatedHeaders.add(query)
+        else updatedHeaders.remove(query)
+        _homeState.value = _homeState.value?.copy(headers = updatedHeaders)
+    }
+
+    fun updateAllHeadersList(headers: List<Pair<String, ListMapItem>>) {
+        val updatedHeaders = _homeState.value?.copy()?.headers?.toMutableSet() ?: return
+        updatedHeaders.clear()
+        updatedHeaders.addAll(headers)
+        _homeState.value = _homeState.value?.copy(headers = updatedHeaders)
+    }
+
     fun getRequestType() = _homeState.value?.requestType?.name ?: GET.name
+
+    fun getQueryParametersViews(): List<String> {
+        return _homeState.value?.queries?.map { it.first } ?: emptyList()
+    }
+
+    fun getHeadersViews(): List<String> {
+        return _homeState.value?.headers?.map { it.first } ?: emptyList()
+    }
 }
 
 data class HomeViewModelState(
     val requestType: RequestType = GET,
-    val headers: List<View> = listOf(),
+    val headers: Set<Pair<String, ListMapItem>> = mutableSetOf(),
+    val queries: Set<Pair<String, ListMapItem>> = mutableSetOf(),
 )
 
 sealed class HomeViewModelEvents {

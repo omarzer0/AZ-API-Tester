@@ -13,8 +13,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 object RequestHandler {
-    private const val TAG = "RequestHandler"
-
     fun networkCall(requestData: RequestData, onComplete: (ResponseData) -> Unit) {
         requestData.apply {
             val uri = initURI(link = uri, paths = paths, queryParameters = queryParameters)
@@ -39,7 +37,6 @@ object RequestHandler {
         val schema = schemaWithAuthority[0]
         val authority = schemaWithAuthority[1].removeSuffix("/")
         val builder = Uri.Builder()
-        Log.e(TAG, "queryParameters: $queryParameters")
 
         return builder.apply {
             scheme(schema)
@@ -104,7 +101,6 @@ object RequestHandler {
                 )
             )
         } catch (e: Exception) {
-            Log.e(TAG, "Exception: ${e.localizedMessage}")
             val responseHeaders: List<ListMapItem> = httpURLConnection.headerFields.map {
                 ListMapItem(it.key, it.value?.toString() ?: "")
             }

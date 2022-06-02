@@ -24,6 +24,8 @@
         <item name="boxCornerRadiusBottomStart">16dp</item>
         <item name="boxCornerRadiusTopEnd">16dp</item>
         <item name="boxBackgroundColor">@color/edBackgroundColor</item>
+        <item name="android:textColorHint">@color/purple_200</item>
+        <item name="android:textColor">@color/textMainColorInvert</item>
         <item name="boxCornerRadiusTopStart">16dp</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
@@ -45,6 +47,13 @@
     <style name="singleLine">
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="colorPrimaryDark">@color/splashBh</item>
+        <item name="android:navigationBarColor">@color/splashBh</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
 </resources>

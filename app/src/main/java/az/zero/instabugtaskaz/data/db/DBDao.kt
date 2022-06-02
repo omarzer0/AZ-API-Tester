@@ -4,7 +4,8 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import az.zero.instabugtaskaz.data.db.RequestWithResponseColumns.REQUEST
 import az.zero.instabugtaskaz.data.db.RequestWithResponseColumns.RESPONSE
 import az.zero.instabugtaskaz.data.db.RequestWithResponseColumns.TIME_STAMP

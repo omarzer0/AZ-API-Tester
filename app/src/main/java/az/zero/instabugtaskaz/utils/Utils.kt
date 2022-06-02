@@ -16,25 +16,6 @@ fun getDateWithTime(timestamp: Long): String {
     return DateFormat.format("dd-MM-yyyy hh:mm:ss", calendar).toString()
 }
 
-fun String.toJson(): JSONObject? {
-    return try {
-        JSONObject(this)
-    } catch (e: Exception) {
-        null
-    }
-}
-
-fun getDataFromJson(json: JSONObject): MutableList<Map<String, String>>? {
-    val resultList: MutableList<Map<String, String>>? = null
-    val keys = json.keys()
-    while (keys.hasNext()) {
-        val key = keys.next() ?: return null
-        val value = json.getString(key) ?: return null
-        resultList?.add(mapOf(key to value))
-    }
-    return resultList
-}
-
 fun readFromStream(inputStream: InputStream?): String {
     val stringBuilder = StringBuilder()
     if (inputStream != null) {
@@ -66,49 +47,3 @@ fun objectFromString(s: String): Any {
     ois.close()
     return o
 }
-
-//private lateinit var binding: FragmentResultBinding
-//    private var data: RequestWithResponseEntity? = null
-//
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        binding = FragmentResultBinding.bind(view)
-//
-//        val serializable = arguments?.getSerializable(REQUEST_WITH_RESPONSE_KEY)
-//        data = if (serializable != null) serializable as RequestWithResponseEntity else null
-//
-//        setDataToViews()
-//
-//    }
-//
-//    private fun setDataToViews() {
-//        data?.apply {
-//            binding.apply {
-//
-//            }
-//        }
-//    }
-//
-//
-//    companion object {
-//        private const val REQUEST_WITH_RESPONSE_KEY = "requestWithResponseEntity"
-//
-//        @JvmStatic
-//        fun newInstance(requestWithResponseEntity: RequestWithResponseEntity) =
-//            ResultFragment().apply {
-//                arguments = Bundle().apply {
-//                    putSerializable(REQUEST_WITH_RESPONSE_KEY, requestWithResponseEntity)
-//                }
-//            }
-//    }
-
-
-//    fun openFragment(requestWithResponse: RequestWithResponseEntity) {
-//
-//        val ft: FragmentTransaction  = childFragmentManager.beginTransaction()
-//        val fragment: Fragment = ResultFragment.newInstance(requestWithResponse)
-//        ft.replace(R.id.root_frame, fragment)
-//        ft.commit()
-//    }
-
