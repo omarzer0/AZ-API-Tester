@@ -1,5 +1,6 @@
 # AZ-API-Tester
 ## App Demo
+[Download the app](https://github.com/omarzer0/AZ-API-Tester/releases/download/pre-release/AZ-API-Tester.apk)
  <table align="center">
    <tr>
       <td><video src="https://user-images.githubusercontent.com/55766997/171704634-154403da-5769-4569-9301-acd8ee392f10.mp4"> </td>
