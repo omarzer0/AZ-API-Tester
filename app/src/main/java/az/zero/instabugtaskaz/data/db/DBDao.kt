@@ -23,7 +23,7 @@ class DBDao private constructor(context: Context) {
 
 
     companion object {
-        /**
+        /*
          * Double lock Singleton pattern prevents multiple database instances
          * Usually we use dagger but NO libraries allowed
          */

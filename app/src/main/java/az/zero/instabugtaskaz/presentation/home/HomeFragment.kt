@@ -119,7 +119,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         var errorMessage = ""
-        val uri = binding.urlEt.text.toString()
+        val uri = binding.urlEt.text.toString().trim()
         if (!uri.isValidURL()) errorMessage = "Not a valid uri"
 
         val headers = viewModel.getHeadersViews().map {
@@ -128,7 +128,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val key = it.findViewById<TextInputEditText>(R.id.key_body_et).text.toString()
             val value = it.findViewById<TextInputEditText>(R.id.value_body_et).text.toString()
             ListMapItem(key, value)
-        }
+        }.filter { !(it.key.isNullOrEmpty() && it.value.isNullOrEmpty()) }
 
         val params = viewModel.getQueryParametersViews().map {
             binding.paramsLl.findViewWithTag<View>(it) ?: return
@@ -136,7 +136,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val key = it.findViewById<TextInputEditText>(R.id.key_body_et).text.toString()
             val value = it.findViewById<TextInputEditText>(R.id.value_body_et).text.toString()
             ListMapItem(key, value)
-        }
+        }.filter { !(it.key.isNullOrEmpty() && it.value.isNullOrEmpty()) }
 
         val requestBody = binding.requestBodyEt.text.toString()
 

@@ -9,7 +9,7 @@ import az.zero.instabugtaskaz.domain.models.request.RequestData
 import az.zero.instabugtaskaz.domain.models.response.ResponseData
 
 class AppRepository private constructor(context: Context) {
-    /** Usually we use dagger but NO libraries allowed*/
+    /* Usually we use dagger but NO libraries allowed*/
     private val dbDao = DBDao(context)
 
     fun networkCall(requestData: RequestData, onComplete: (ResponseData) -> Unit) {
@@ -25,7 +25,7 @@ class AppRepository private constructor(context: Context) {
 
 
     companion object {
-        /**
+        /*
          * Double lock Singleton pattern prevents multiple Repository instances
          * Usually we use dagger but NO libraries allowed
          */

@@ -3,15 +3,15 @@ package az.zero.instabugtaskaz.presentation.result
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.TransitionManager
-import android.util.AttributeSet
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.transition.Transition
 import az.zero.instabugtaskaz.data.db.RequestWithResponseEntity
+import az.zero.instabugtaskaz.data.network.RequestHandler.RequestType.GET
 import az.zero.instabugtaskaz.databinding.ActivityResultBinding
 import az.zero.instabugtaskaz.presentation.adapters.ListMapAdapter
+import az.zero.instabugtaskaz.utils.gone
+import az.zero.instabugtaskaz.utils.show
 
 class ResultActivity : AppCompatActivity() {
     private var data: RequestWithResponseEntity? = null
@@ -42,9 +42,6 @@ class ResultActivity : AppCompatActivity() {
         viewModel.resultState.observe(this) {
             binding.apply {
                 TransitionManager.beginDelayedTransition(root)
-                btnShowQueries.isVisible = it.queryParamVisible
-                btnHideQueries.isVisible = !it.queryParamVisible
-                rvQueryParams.isVisible = it.queryParamVisible
 
                 btnShowRequestHeaders.isVisible = it.requestHeaderVisible
                 btnHideRequestHeaders.isVisible = !it.requestHeaderVisible
@@ -53,6 +50,20 @@ class ResultActivity : AppCompatActivity() {
                 btnShowResponseHeaders.isVisible = it.responseHeaderVisible
                 btnHideResponseHeaders.isVisible = !it.responseHeaderVisible
                 rvResponseHeaders.isVisible = it.responseHeaderVisible
+
+                btnShowResponseBody.isVisible = it.responseBodyVisible
+                btnHideResponseBody.isVisible = !it.responseBodyVisible
+                tvResponseBody.isVisible = it.responseBodyVisible
+
+                if (viewModel.getRequestType() == GET.name){
+                    btnShowQueries.isVisible = it.queryParamVisible
+                    btnHideQueries.isVisible = !it.queryParamVisible
+                    rvQueryParams.isVisible = it.queryParamVisible
+                }else{
+                    btnShowRequestBody.isVisible = it.requestBodyVisible
+                    btnHideRequestBody.isVisible = !it.requestBodyVisible
+                    tvRequestBody.isVisible = it.requestBodyVisible
+                }
             }
         }
     }
@@ -80,6 +91,22 @@ class ResultActivity : AppCompatActivity() {
             btnHideResponseHeaders.setOnClickListener {
                 viewModel.toggle(WhichViewToGoggle.RESPONSE_HEADER)
             }
+
+            btnShowRequestBody.setOnClickListener {
+                viewModel.toggle(WhichViewToGoggle.REQUEST_BODY)
+            }
+
+            btnHideRequestBody.setOnClickListener {
+                viewModel.toggle(WhichViewToGoggle.REQUEST_BODY)
+            }
+
+            btnShowResponseBody.setOnClickListener {
+                viewModel.toggle(WhichViewToGoggle.RESOPNSE_BODY)
+            }
+
+            btnHideResponseBody.setOnClickListener {
+                viewModel.toggle(WhichViewToGoggle.RESOPNSE_BODY)
+            }
         }
     }
 
@@ -104,6 +131,23 @@ class ResultActivity : AppCompatActivity() {
                 queriesAdapter.changeItems(it.request.queryParameters)
                 requestHeaderAdapter.changeItems(it.request.requestHeaders)
                 responseHeadersAdapter.changeItems(it.response.responseHeaders)
+
+                tvRequestBody.text = it.request.requestBody.ifEmpty { "No Request Body" }
+                tvResponseBody.text = it.response.responseBody.ifEmpty { "No Response Body" }
+
+                val isGetRequest = viewModel.getRequestType() == GET.name
+                if (isGetRequest){
+                    tvQueryParamsTitle.show()
+                    btnShowQueries.show()
+                    btnHideQueries.show()
+                    rvQueryParams.show()
+                }else{
+                    tvRequestBodyTitle.show()
+                    btnShowRequestBody.show()
+                    btnHideRequestBody.show()
+                    tvRequestBody.show()
+                }
+
             }
         }
     }

@@ -21,6 +21,8 @@
     <color name="queriesRVColor">@android:color/holo_orange_dark</color>
     <color name="requestHeaderColor">@color/teal_200</color>
     <color name="responseHeaderColor">@android:color/holo_blue_dark</color>
+    <color name="requestBodyColor">@android:color/holo_purple</color>
+    <color name="responseBodyColor">@color/purple_700</color>
 
     <color name="getTextColor">@android:color/holo_green_dark</color>
     <color name="postTextColor">@android:color/holo_orange_dark</color>

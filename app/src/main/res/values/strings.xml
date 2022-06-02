@@ -21,4 +21,5 @@
     <string name="post_only">POST only</string>
     <string name="time_decs">Time Decs</string>
     <string name="time_asc">Time Asc</string>
+    <string name="response_body">Response body</string>
 </resources>

@@ -6,12 +6,14 @@ import java.io.Serializable
 data class RequestData(
     val uri: String,
     val requestHeaders: List<ListMapItem>,
+    // This is for later when we add dynamic paths
     val paths: List<String>,
     val requestBody: String,
     val queryParameters: List<ListMapItem>,
     val requestType: String,
+    // This is for later when we separate responses and requests
     val executionTime: Long
-):Serializable
+) : Serializable
 
 
 /**
