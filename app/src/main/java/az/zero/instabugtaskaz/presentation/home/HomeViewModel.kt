@@ -1,7 +1,6 @@
 package az.zero.instabugtaskaz.presentation.home
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -87,23 +86,5 @@ class HomeViewModel(context: Context) : ViewModel() {
 
     fun getHeadersViews(): List<String> {
         return _homeState.value?.headers?.map { it.first } ?: emptyList()
-    }
-}
-
-data class HomeViewModelState(
-    val requestType: RequestType = GET,
-    val headers: Set<Pair<String, ListMapItem>> = mutableSetOf(),
-    val queries: Set<Pair<String, ListMapItem>> = mutableSetOf(),
-)
-
-sealed class HomeViewModelEvents {
-    data class NavigateToResult(val requestWithResponseEntity: RequestWithResponseEntity) :
-        HomeViewModelEvents()
-
-}
-
-class HomeProviderFactory(private val context: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeViewModel(context) as T
     }
 }

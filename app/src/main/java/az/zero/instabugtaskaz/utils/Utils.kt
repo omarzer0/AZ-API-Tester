@@ -10,6 +10,8 @@ import java.util.*
 
 fun String.isValidURL() = this.isNotEmpty() && Patterns.WEB_URL.matcher(this).matches()
 
+fun String.hasQueryParams() = this.contains("?")
+
 fun getDateWithTime(timestamp: Long): String {
     val calendar = Calendar.getInstance(Locale.ENGLISH)
     calendar.timeInMillis = timestamp * 1000L

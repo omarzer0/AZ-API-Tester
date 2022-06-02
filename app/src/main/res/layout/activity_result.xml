@@ -75,13 +75,26 @@
             app:layout_constraintTop_toTopOf="@+id/tv2__"
             tools:text="No Error" />
 
+
+        <TextView
+            android:id="@+id/tvUri"
+            style="@style/bodyTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvResponseCode"
+            app:layout_constraintStart_toStartOf="@+id/tv2__"
+            app:layout_constraintTop_toBottomOf="@+id/tv2__"
+            tools:text="Https://dsadas.com" />
+
         <View
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/secondaryTextColor"
-            app:layout_constraintTop_toBottomOf="@+id/tvErrorMessage" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUri" />
 
 
         <TextView

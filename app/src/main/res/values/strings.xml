@@ -22,4 +22,5 @@
     <string name="time_decs">Time Decs</string>
     <string name="time_asc">Time Asc</string>
     <string name="response_body">Response body</string>
+    <string name="uri">Uri</string>
 </resources>

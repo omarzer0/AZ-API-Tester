@@ -21,6 +21,7 @@ import az.zero.instabugtaskaz.domain.models.ListMapItem
 import az.zero.instabugtaskaz.domain.models.request.RequestData
 import az.zero.instabugtaskaz.presentation.result.ResultActivity
 import az.zero.instabugtaskaz.presentation.result.ResultActivity.Companion.REQUEST_WITH_RESPONSE_KEY
+import az.zero.instabugtaskaz.utils.hasQueryParams
 import az.zero.instabugtaskaz.utils.isValidURL
 import az.zero.instabugtaskaz.utils.observeIfNotHandled
 import com.google.android.material.textfield.TextInputEditText
@@ -121,6 +122,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         var errorMessage = ""
         val uri = binding.urlEt.text.toString().trim()
         if (!uri.isValidURL()) errorMessage = "Not a valid uri"
+        if (uri.hasQueryParams()) errorMessage =
+            "The uri contains query parameter/s if you want to add queries please choose GET and add them"
 
         val headers = viewModel.getHeadersViews().map {
             binding.headerLl.findViewWithTag<View>(it) ?: return
@@ -227,7 +230,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showToast(message: String) {
         toast?.cancel()
-        toast = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
+        toast = Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
         toast?.show()
     }
 }

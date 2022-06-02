@@ -69,22 +69,3 @@ class SearchViewModel(context: Context) : ViewModel() {
         }
     }
 }
-
-data class SearchViewModelState(
-    val typeToShow: TypeToShow = ALL,
-    val sortDesc: Boolean = true,
-    val requestWithResponses: List<RequestWithResponseEntity> = emptyList()
-)
-
-enum class TypeToShow {
-    ALL,
-    GET,
-    POST
-}
-
-
-class SearchProviderFactory(private val context: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SearchViewModel(context) as T
-    }
-}

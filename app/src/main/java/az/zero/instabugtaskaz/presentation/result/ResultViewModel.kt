@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import az.zero.instabugtaskaz.data.db.RequestWithResponseEntity
-import az.zero.instabugtaskaz.data.network.RequestHandler
 import az.zero.instabugtaskaz.data.network.RequestHandler.RequestType.GET
-import az.zero.instabugtaskaz.presentation.result.WhichViewToGoggle.*
+import az.zero.instabugtaskaz.presentation.result.WhichViewToToggle.*
 
 class ResultViewModel : ViewModel() {
     private val _resultState = MutableLiveData<ResultViewModelState>()
@@ -21,16 +20,16 @@ class ResultViewModel : ViewModel() {
 
     fun getData(): RequestWithResponseEntity? = data
 
-    fun getRequestType(): String = data?.request?.requestType?: GET.name
+    fun getRequestType(): String = data?.request?.requestType ?: GET.name
 
-    fun toggle(whichViewToGoggle: WhichViewToGoggle) {
+    fun toggle(whichViewToToggle: WhichViewToToggle) {
         val oldState = _resultState.value?.copy() ?: return
-        _resultState.value = when (whichViewToGoggle) {
+        _resultState.value = when (whichViewToToggle) {
             QUERY -> oldState.copy(queryParamVisible = !oldState.queryParamVisible)
             REQUEST_HEADER -> oldState.copy(requestHeaderVisible = !oldState.requestHeaderVisible)
             RESPONSE_HEADER -> oldState.copy(responseHeaderVisible = !oldState.responseHeaderVisible)
             REQUEST_BODY -> oldState.copy(requestBodyVisible = !oldState.requestBodyVisible)
-            RESOPNSE_BODY ->  oldState.copy(responseBodyVisible = !oldState.responseBodyVisible)
+            RESOPNSE_BODY -> oldState.copy(responseBodyVisible = !oldState.responseBodyVisible)
         }
     }
 
@@ -38,19 +37,3 @@ class ResultViewModel : ViewModel() {
         _resultState.value = ResultViewModelState()
     }
 }
-
-enum class WhichViewToGoggle {
-    QUERY,
-    REQUEST_HEADER,
-    RESPONSE_HEADER,
-    REQUEST_BODY,
-    RESOPNSE_BODY
-}
-
-data class ResultViewModelState(
-    val queryParamVisible: Boolean = false,
-    val requestHeaderVisible: Boolean = false,
-    val responseHeaderVisible: Boolean = false,
-    val requestBodyVisible: Boolean = false,
-    val responseBodyVisible: Boolean = false,
-)
